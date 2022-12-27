@@ -1,23 +1,17 @@
 <?php
 
-namespace Zoumi\Money;
+namespace Zoumi\Link;
 
 use CortexPE\Commando\exception\HookAlreadyRegistered;
 use CortexPE\Commando\PacketHooker;
-use Logger;
 use pocketmine\plugin\PluginBase;
-use pocketmine\plugin\PluginLogger;
 use pocketmine\utils\Config;
-use pocketmine\utils\Internet;
-use pocketmine\utils\InternetException;
-use pocketmine\utils\MainLogger;
 use pocketmine\utils\SingletonTrait;
-use Zoumi\Money\async\GetRequestAsyncTask;
-use Zoumi\Money\async\PostRequestAsyncTask;
-use Zoumi\Money\loaders\CommandLoader;
-use Zoumi\Money\loaders\ListenerLoader;
+use Zoumi\Link\async\PostRequestAsyncTask;
+use Zoumi\Link\loaders\CommandLoader;
+use Zoumi\Link\loaders\ListenerLoader;
 
-class Money extends PluginBase
+class Link extends PluginBase
 {
     use SingletonTrait;
 
@@ -34,14 +28,13 @@ class Money extends PluginBase
     {
         $this->saveDefaultConfig();
         $this->saveResource("lang.yml");
-
         if (!PacketHooker::isRegistered()) {
             PacketHooker::register($this);
         }
 
         $this->getServer()->getAsyncPool()->submitTask(new PostRequestAsyncTask(
-            "http://moonlight-mcbe.fr:3000/api/money/" . Money::getToken(),
-            ["token" => Money::getToken()],
+            "http://moonlight-mcbe.fr:3000/api/link/" . Link::getToken(),
+            ["token" => Link::getToken()],
             function (array $result) {
                 if ($result["code"] === 1 || $result["code"] === 404) {
                     $this->getLogger()->error("Token invalid.");
@@ -54,8 +47,8 @@ class Money extends PluginBase
             }
         ));
 
-        CommandLoader::init();
         ListenerLoader::init();
+        CommandLoader::init();
     }
 
     /**
@@ -66,6 +59,10 @@ class Money extends PluginBase
         return self::getInstance()->getConfig()->get("token");
     }
 
+    /**
+     * @param string $key
+     * @return string
+     */
     public static function getMessage(string $key): string
     {
         return (new Config(self::getInstance()->getDataFolder() . "lang.yml", Config::YAML))->get($key);

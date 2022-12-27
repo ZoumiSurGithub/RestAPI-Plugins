@@ -1,0 +1,5 @@
+link: "§l§cPlease do not give your code to just anyone!!! §r§aHere is your code: {code}"
+already-link: "§cYou are already linked to a discord account! Do /unlink to unlink yourself."
+already-unlink: "§cYou have not yet linked your account."
+unlink: "§aYou have just unlink your discord account."
+player-not-found: "§cPlayer not found."

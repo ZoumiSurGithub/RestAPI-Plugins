@@ -1,0 +1,5 @@
+name: Link
+version: 0.0.1
+main: Zoumi\Link\Link
+author: Zoumi
+api: 4.0.0

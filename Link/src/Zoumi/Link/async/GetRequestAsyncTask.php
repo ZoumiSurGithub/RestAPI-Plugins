@@ -1,11 +1,11 @@
 <?php
 
-namespace Zoumi\Money\async;
+namespace Zoumi\Link\async;
 
 use pocketmine\scheduler\AsyncTask;
-use Zoumi\Money\Money;
+use Zoumi\Link\Link;
 
-class PostRequestAsyncTask extends AsyncTask
+class GetRequestAsyncTask extends AsyncTask
 {
     private string $request;
     private $callable;
@@ -22,7 +22,7 @@ class PostRequestAsyncTask extends AsyncTask
     {
         try {
             $context = stream_context_create(["http" => [
-                'method' => 'POST',
+                'method' => 'GET',
                 'header' => 'Content-type: application/json',
                 'content' => json_encode($this->body)
             ],
@@ -39,7 +39,7 @@ class PostRequestAsyncTask extends AsyncTask
 
     public function onCompletion(): void
     {
-        Money::getInstance()->getLogger()->debug("Request post send, result: \n" . json_encode($this->getResult()));
+        Link::getInstance()->getLogger()->debug("Request get send, result: \n" . json_encode($this->getResult()));
         if (!empty($this->callable)) {
             call_user_func($this->callable, $this->getResult());
         }

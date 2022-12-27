@@ -1,0 +1,12 @@
+player-not-found: "§cPlayer not found."
+
+see-yourself: "§aYou have {money} of money."
+see-target: "§a{target} has {money} of money."
+
+add-money: "§aYou have just added {money} of money to the player {target}."
+
+remove-money: "§aYou have just removed {money} of money to the player {target}."
+
+set-money: "§aYou have just set the money of the player {target} to {money}."
+
+error: "§cAn error occurred during the query on the api."
