@@ -4,6 +4,7 @@ namespace Zoumi\Money\commands;
 
 use CortexPE\Commando\args\TargetArgument;
 use CortexPE\Commando\BaseCommand;
+use CortexPE\Commando\exception\ArgumentOrderException;
 use pocketmine\command\CommandSender;
 use pocketmine\player\Player;
 use pocketmine\Server;
@@ -14,6 +15,9 @@ use Zoumi\Money\Money;
 class SeeMoneyCommand extends BaseCommand
 {
 
+    /**
+     * @throws ArgumentOrderException
+     */
     protected function prepare(): void
     {
         $this->registerArgument(0, new TargetArgument("target", true));
