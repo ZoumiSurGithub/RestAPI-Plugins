@@ -1,0 +1,13 @@
+name: Money
+version: 0.0.1
+api: 4.0.0
+main: Zoumi\Money\Money
+author: Zoumi
+
+permissions:
+  money.command.setmoney:
+    default: op
+  money.command.addmoney:
+    default: op
+  money.command.removemoney:
+    default: op

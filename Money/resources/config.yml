@@ -1,0 +1,3 @@
+# Ce plugin dépend du bot MCBE Serv Stats sur discord.
+# Pour obtenir la clé faites /getkey sur votre serveur discord.
+token: "YOUR TOKEN HERE"
